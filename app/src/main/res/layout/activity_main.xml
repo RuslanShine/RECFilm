@@ -31,5 +31,4 @@
         android:background="@color/purple_700"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
