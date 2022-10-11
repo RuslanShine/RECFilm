@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RecFilm</string>
+    <string name="button1">MENU</string>
+    <string name="button2">FAVOURITES</string>
+    <string name="button3">SEE LATER</string>
+    <string name="button4">COLLECTIONS</string>
+    <string name="button5">SETTINGS</string>
+    <string name="disclaimer">Posters provided https://www.movieposters.com/</string>
+</resources>
