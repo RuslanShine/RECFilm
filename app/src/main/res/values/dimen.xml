@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="top_bar_layout_height_100">100dp</dimen>
+    <dimen name="top_bar_layout_margin_10">10dp</dimen>
+    <dimen name="top_bar_cardCornerRadius_15">15dp</dimen>
+    <dimen name="top_bar_elevation_5">5dp</dimen>
+
+    <dimen name="imageView_layout_height_125">125dp</dimen>
+    <dimen name="imageView5_layout_weight_404">404dp</dimen>
+
+    <dimen name="TextView_marginTop_16">16dp</dimen>
+    <dimen name="TextView_marginEnd_16">16dp</dimen>
+</resources>

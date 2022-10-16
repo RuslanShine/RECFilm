@@ -39,10 +39,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_margin="10dp"
-        android:elevation="5dp"
-        app:cardCornerRadius="15dp"
+        android:layout_height="@dimen/top_bar_layout_height_100"
+        android:layout_margin="@dimen/top_bar_layout_margin_10"
+        android:elevation="@dimen/top_bar_elevation_5"
+        app:cardCornerRadius="@dimen/top_bar_cardCornerRadius_15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
@@ -55,14 +55,14 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
-                android:layout_height="125dp"
+                android:layout_height="@dimen/imageView_layout_height_125"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/poster1" />
 
             <ImageView
                 android:id="@+id/imageView5"
-                android:layout_width="404dp"
+                android:layout_width="@dimen/imageView5_layout_weight_404"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
@@ -91,14 +91,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="@dimen/TextView_marginTop_16"
+        android:layout_marginEnd="@dimen/TextView_marginEnd_16"
         android:autoLink="web"
         android:clickable="true"
         android:text="@string/disclaimer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar"
-
-        />
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
