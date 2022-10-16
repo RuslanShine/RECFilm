@@ -6,4 +6,8 @@
     <string name="button4">ПОДБОРКИ</string>
     <string name="button5">НАСТРОЙКИ</string>
     <string name="disclaimer">Постеры предоставленны https://www.movieposters.com/</string>
+    <string name="menu_selections_title">Подборки</string>
+    <string name="menu_watch_later_title">Смотреть позже</string>
+    <string name="menu_favorites_title">Избранное</string>
+    <string name="menu_settings">Настройки</string>
 </resources>
