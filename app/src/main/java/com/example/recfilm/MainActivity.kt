@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         initNavigation()
     }
 
-    fun onCreate() {
+    private fun onCreate() {
         topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.settings -> {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun initNavigation() {
+    private fun initNavigation() {
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
