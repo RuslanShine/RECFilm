@@ -109,7 +109,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/navigation_menu" />
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -160,7 +159,6 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
 
     <TextView
         android:id="@+id/disclaimer"
