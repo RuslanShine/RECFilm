@@ -1,11 +1,11 @@
 package com.example.recfilm
 
-import android.content.DialogInterface.OnClickListener
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class FilmListRecyclerAdapter(private val clickListener: OnClickListener) :
+class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = mutableListOf<Film>()
@@ -19,13 +19,14 @@ class FilmListRecyclerAdapter(private val clickListener: OnClickListener) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is FilmViewHolder -> {
-
+                holder.bind(items[position])
             }
         }
     }
 
     override fun getItemCount() = items.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun addItems(list: List<Film>) {
         items.clear()
         items.addAll(list)
