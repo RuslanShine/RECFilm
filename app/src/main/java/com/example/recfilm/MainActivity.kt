@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings.Global.getString
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -26,9 +27,9 @@ class MainActivity : AppCompatActivity() {
 
     fun launchDetailsFragment(film: Film) {
         val bundle = Bundle()
-        bundle.putParcelable("film",film)
-        val fragment= DetailsFragment()
-        fragment.arguments=bundle
+        bundle.putParcelable("film", film)
+        val fragment = DetailsFragment()
+        fragment.arguments = bundle
 
         supportFragmentManager
             .beginTransaction()
@@ -36,38 +37,61 @@ class MainActivity : AppCompatActivity() {
             .addToBackStack(null)
             .commit()
     }
-}
 
-private fun initNavigation() {
-
-    topAppBar.setOnMenuItemClickListener {
-        when (it.itemId) {
-            R.id.settings -> {
-                Toast.makeText(this, getString(R.string.menu_settings_toast), Toast.LENGTH_SHORT)
-                    .show()
-                true
-            }
-            else -> false
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            AlertDialog.Builder(this)
+                .setTitle("Вы хотите выйти?")
+                .setIcon(R.drawable.ic_round_collections)
+                .setPositiveButton("Да") { _, _ ->
+                    finish()
+                }
+                .setNegativeButton("Нет") { _, _ ->
+                }
+                .show()
+        } else {
+            super.onBackPressed()
         }
     }
 
-    bottom_navigation.setOnNavigationItemSelectedListener {
+    private fun initNavigation() {
 
-        when (it.itemId) {
-            R.id.favorites -> {
-                Toast.makeText(this, getString(R.string.menu_favorites), Toast.LENGTH_SHORT).show()
-                true
+        topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.settings -> {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.menu_settings_toast),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    true
+                }
+                else -> false
             }
-            R.id.watch_later -> {
-                Toast.makeText(this, getString(R.string.menu_watch_later), Toast.LENGTH_SHORT)
-                    .show()
-                true
+        }
+
+        bottom_navigation.setOnNavigationItemSelectedListener {
+
+            when (it.itemId) {
+                R.id.favorites -> {
+                    Toast.makeText(this, getString(R.string.menu_favorites), Toast.LENGTH_SHORT)
+                        .show()
+                    true
+                }
+                R.id.watch_later -> {
+                    Toast.makeText(this, getString(R.string.menu_watch_later), Toast.LENGTH_SHORT)
+                        .show()
+                    true
+                }
+                R.id.selections -> {
+                    Toast.makeText(this, getString(R.string.menu_selections), Toast.LENGTH_SHORT)
+                        .show()
+                    true
+                }
+                else -> false
             }
-            R.id.selections -> {
-                Toast.makeText(this, getString(R.string.menu_selections), Toast.LENGTH_SHORT).show()
-                true
-            }
-            else -> false
         }
     }
+
 }
