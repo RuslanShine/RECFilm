@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+val NUMBER_FRAGMENTS = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,14 +79,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
+        if (supportFragmentManager.backStackEntryCount == NUMBER_FRAGMENTS) {
             AlertDialog.Builder(this)
-                .setTitle("Вы хотите выйти?")
+                .setTitle(R.string.text_Dialog)
                 .setIcon(R.drawable.ic_round_collections)
-                .setPositiveButton("Да") { _, _ ->
+                .setPositiveButton(R.string.text_Dialog_yes) { _, _ ->
                     finish()
                 }
-                .setNegativeButton("Нет") { _, _ ->
+                .setNegativeButton(R.string.text_Dialog_no) { _, _ ->
 
                 }
                 .show()
