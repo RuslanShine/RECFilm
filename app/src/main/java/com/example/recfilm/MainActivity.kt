@@ -3,24 +3,14 @@ package com.example.recfilm
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings.Global.getString
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var filmsAdapter: FilmListRecyclerAdapter
-    val filmsDataBase = listOf(
-        Film("Interstellar",R.drawable.interstellar,"Будущее Земли было пронизано бедствиями, голодом и засухой. Есть только один способ обеспечить выживание человечества: межзвездное путешествие. Недавно обнаруженная червоточина в дальних уголках нашей Солнечной системы позволяет команде астронавтов отправиться туда, где раньше не бывал ни один человек, на планете, которая может иметь подходящую среду для поддержания человеческой жизни"),
-        Film("The batman",R.drawable.the_batman,"Бэтмен отправляется в преступный мир Готэм-сити, когда убийца-садист оставляет за собой след загадочных улик. По мере того, как улики начинают приближаться к дому, а масштаб планов преступника становится ясным, он должен наладить новые отношения, разоблачить преступника и восстановить справедливость. к злоупотреблению властью и коррупции, которые давно преследуют мегаполис."),
-        Film("The social",R.drawable.the_social,"Осенним вечером 2003 года выпускник Гарварда и гений компьютерного программирования Марк Цукерберг садится за свой компьютер и с энтузиазмом начинает работать над новой идеей. В ярости ведения блога и программирования то, что начинается в его комнате в общежитии, вскоре становится глобальной социальной сетью и революцией в общении. Всего через шесть лет и 500 миллионов друзей Марк Цукерберг стал самым молодым миллиардером в истории… но для этого предпринимателя успех приводит как к личным, так и к юридическим осложнениям."),
-        Film("Star vars",R.drawable.star_vars_poster,"Спустя 30 лет после поражения Дарта Вейдера и Империи Рей, мусорщик с планеты Джакку, находит дроида BB-8, который знает местонахождение давно потерянного Люка Скайуокера. Рей, а также штурмовик-изгой и два контрабандиста оказываются в эпицентре битвы между Сопротивлением и устрашающими легионами Первого Ордена."),
-        Film("Spider man",R.drawable.spider_man,"Тайная личность Питера Паркера раскрывается всему миру. Отчаянно нуждаясь в помощи, Питер обращается к Доктору Стрэнджу, чтобы заставить мир забыть, что он Человек-Паук. Заклинание идет ужасно неправильно и разрушает мультивселенную, вызывая чудовищных злодеев, которые могут уничтожить мир."),
-        Film("Ready player one",R.drawable.ready_player_one,"В 2045 году реальный мир стал суровым местом. Единственный раз, когда Уэйд Уоттс (Тай Шеридан) по-настоящему чувствует себя живым, это когда он сбегает в ОАЗИС, захватывающую виртуальную вселенную, где большинство людей проводит свои дни. В OASIS вы можете идти куда угодно, делать что угодно, быть кем угодно — единственными ограничениями являются ваше собственное воображение. ОАЗИС был создан блестящим и эксцентричным Джеймсом Холлидеем (Марк Райлэнс), который оставил свое огромное состояние и полный контроль над Оазисом победителю конкурса, состоящего из трех частей, который он задумал, чтобы найти достойного наследника. Когда Уэйд справится с первым испытанием в искажающей реальность охоте за сокровищами, он и его друзья — The High Five — попадут в фантастическую вселенную открытий и опасностей, чтобы спасти ОАЗИС."),
-        Film("Queens gambit",R.drawable.queens_gambit,"Девятилетняя сирота Бет Хармон тихая, угрюмая и внешне ничем не примечательная. То есть, пока она не сыграет свою первую партию в шахматы. Ее чувства обостряются, мышление становится яснее, и впервые в жизни она чувствует, что полностью контролирует ситуацию. К шестнадцати годам она участвует в Открытом чемпионате США. Но по мере того, как Бет оттачивает свои навыки в профессиональной сфере, ставки становятся выше, ее изоляция становится все более пугающей, а мысль о побеге становится все более заманчивой. По книге Уолтера Тевиса."),
-        Film("Inception",R.drawable.inception,"Дом Кобб — искусный вор, лучший в опасном искусстве добычи, он крадет ценные секреты из глубины подсознания во сне, когда разум наиболее уязвим. Редкие способности Кобба сделали его желанным игроком в этом предательском новом мире корпоративного шпионажа, но также сделали его международным беглецом и стоили ему всего, что он когда-либо любил. Теперь Коббу предлагают шанс на искупление. Одна последняя работа может вернуть ему жизнь, но только если он сможет совершить невозможное, начало. Вместо идеального ограбления Коббу и его команде специалистов приходится проворачивать обратное: их задача — не украсть идею, а внедрить ее. Если им это удастся, это может быть идеальное преступление. Но никакое тщательное планирование или опыт не могут подготовить команду к встрече с опасным врагом, который, кажется, предугадывает каждое их движение. Враг, которого мог предвидеть только Кобб."),
-        Film("Anna inventing",R.drawable.anna_inventing,"Дом Кобб — искусный вор, лучший в опасном искусстве добычи, он крадет ценные секреты из глубины подсознания во сне, когда разум наиболее уязвим. Редкие способности Кобба сделали его желанным игроком в этом предательском новом мире корпоративного шпионажа, но также сделали его международным беглецом и стоили ему всего, что он когда-либо любил. Теперь Коббу предлагают шанс на искупление. Одна последняя работа может вернуть ему жизнь, но только если он сможет совершить невозможное, начало. Вместо идеального ограбления Коббу и его команде специалистов приходится проворачивать обратное: их задача — не украсть идею, а внедрить ее. Если им это удастся, это может быть идеальное преступление. Но никакое тщательное планирование или опыт не могут подготовить команду к встрече с опасным врагом, который, кажется, предугадывает каждое их движение. Враг, которого мог предвидеть только Кобб.")
-
-    )
+val NUMBER_FRAGMENTS = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +18,24 @@ class MainActivity : AppCompatActivity() {
 
         initNavigation()
 
-        main_recycler.apply {
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment_placeholder, HomeFragment())
+            .addToBackStack(null)
+            .commit()
+    }
 
+    fun launchDetailsFragment(film: Film) {
+        val bundle = Bundle()
+        bundle.putParcelable("film", film)
+        val fragment = DetailsFragment()
+        fragment.arguments = bundle
 
-            filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener{
-                override fun click(film: Film) {
-                    val bundle = Bundle()
-                    bundle.putParcelable("film", film)
-                    val intent = Intent(this@MainActivity, DetailsActivity::class.java)
-                    intent.putExtras(bundle)
-                    startActivity(intent)
-                }
-            })
-            adapter = filmsAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            val decorator = TopSpacingItemDecoration(8)
-            addItemDecoration(decorator)
-        }
-
-        filmsAdapter.addItems(filmsDataBase)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun initNavigation() {
@@ -54,7 +43,12 @@ class MainActivity : AppCompatActivity() {
         topAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.settings -> {
-                    Toast.makeText(this, getString(R.string.menu_settings_toast), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.menu_settings_toast),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                     true
                 }
                 else -> false
@@ -65,19 +59,39 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, getString(R.string.menu_favorites), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.menu_favorites), Toast.LENGTH_SHORT)
+                        .show()
                     true
                 }
                 R.id.watch_later -> {
-                    Toast.makeText(this, getString(R.string.menu_watch_later), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.menu_watch_later), Toast.LENGTH_SHORT)
+                        .show()
                     true
                 }
                 R.id.selections -> {
-                    Toast.makeText(this, getString(R.string.menu_selections), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.menu_selections), Toast.LENGTH_SHORT)
+                        .show()
                     true
                 }
                 else -> false
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == NUMBER_FRAGMENTS) {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.text_Dialog)
+                .setIcon(R.drawable.ic_round_collections)
+                .setPositiveButton(R.string.text_Dialog_yes) { _, _ ->
+                    finish()
+                }
+                .setNegativeButton(R.string.text_Dialog_no) { _, _ ->
+
+                }
+                .show()
+        } else {
+            super.onBackPressed()
         }
     }
 }
