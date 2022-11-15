@@ -24,11 +24,6 @@ class DetailsFragment : Fragment() {
 
         setFilmsDetails()
 
-//        details_fab_favorites.setImageResource(
-//            if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
-//            else R.drawable.ic_baseline_favorite_border_24
-//        )
-
         details_fab_favorites.setOnClickListener {
             if (!film.isInFavorites) {
                 details_fab_favorites.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -58,7 +53,7 @@ class DetailsFragment : Fragment() {
 
     private fun setFilmsDetails() {
         //Получаем наш фильм из переданного бандла
-        val film = arguments?.get("film") as Film
+        film = arguments?.get("film") as Film
 
         //Устанавливаем заголовок
         details_toolbar.title = film.title
@@ -66,6 +61,11 @@ class DetailsFragment : Fragment() {
         details_poster.setImageResource(film.poster)
         //Устанавливаем описание
         details_description.text = film.description
+
+        details_fab_favorites.setImageResource(
+            if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
+            else R.drawable.ic_baseline_favorite_border_24
+        )
     }
 }
 
