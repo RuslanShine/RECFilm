@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-val NUMBER_FRAGMENTS = 1
+private val NUMBER_FRAGMENTS = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +59,11 @@ val NUMBER_FRAGMENTS = 1
 
             when (it.itemId) {
                 R.id.favorites -> {
-                    Toast.makeText(this, getString(R.string.menu_favorites), Toast.LENGTH_SHORT)
-                        .show()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fragment_placeholder, FavoritesFragment())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
                 R.id.watch_later -> {
