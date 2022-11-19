@@ -40,21 +40,6 @@ private val NUMBER_FRAGMENTS = 1
 
     private fun initNavigation() {
 
-        topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.settings -> {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.menu_settings_toast),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                    true
-                }
-                else -> false
-            }
-        }
-
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
@@ -73,6 +58,21 @@ private val NUMBER_FRAGMENTS = 1
                 }
                 R.id.selections -> {
                     Toast.makeText(this, getString(R.string.menu_selections), Toast.LENGTH_SHORT)
+                        .show()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        topAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.settings -> {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.menu_settings_toast),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                     true
                 }
