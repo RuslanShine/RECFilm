@@ -2,6 +2,7 @@ package com.example.recfilm
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.film_item.view.*
 
 class FilmViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -11,7 +12,10 @@ class FilmViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemV
 
     fun bind(film: Film) {
         title.text = film.title
-        poster.setImageResource(film.poster)
+        Glide.with(itemView)
+            .load(film.poster)
+            .centerCrop()
+            .into(poster)
         description.text = film.description
     }
 }
