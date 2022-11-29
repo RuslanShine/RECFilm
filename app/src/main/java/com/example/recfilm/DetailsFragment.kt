@@ -3,6 +3,8 @@ package com.example.recfilm
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Slide
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
+
     private lateinit var film: Film
 
     override fun onCreateView(

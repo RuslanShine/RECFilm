@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.merge_home_screen_content.*
 import java.util.*
 
 class HomeFragment : Fragment() {
+
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     val filmsDataBase = listOf(
         Film(
