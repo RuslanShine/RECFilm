@@ -6,11 +6,12 @@ import android.os.Bundle
 import android.provider.Settings.Global.getString
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-private val NUMBER_FRAGMENTS = 1
+    private val NUMBER_FRAGMENTS = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,22 +44,28 @@ private val NUMBER_FRAGMENTS = 1
         bottom_navigation.setOnNavigationItemSelectedListener {
 
             when (it.itemId) {
+                R.id.home -> {
+                    val tag = "home"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: HomeFragment(), tag)
+                    true
+                }
                 R.id.favorites -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.fragment_placeholder, FavoritesFragment())
-                        .addToBackStack(null)
-                        .commit()
+                    val tag = "favorites"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: FavoritesFragment(), tag)
                     true
                 }
                 R.id.watch_later -> {
-                    Toast.makeText(this, getString(R.string.menu_watch_later), Toast.LENGTH_SHORT)
-                        .show()
+                    val tag = "watch_later"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: WatchLaterFragment(), tag)
                     true
                 }
                 R.id.selections -> {
-                    Toast.makeText(this, getString(R.string.menu_selections), Toast.LENGTH_SHORT)
-                        .show()
+                    val tag = "selections"
+                    val fragment = checkFragmentExistence(tag)
+                    changeFragment(fragment ?: SelectionsFragment(), tag)
                     true
                 }
                 else -> false
@@ -81,6 +88,18 @@ private val NUMBER_FRAGMENTS = 1
         }
     }
 
+    //Ищем фрагмент по тэгу, если он есть то возвращаем его, если нет - то null
+    private fun checkFragmentExistence(tag: String): Fragment? = supportFragmentManager.findFragmentByTag(tag)
+
+    private fun changeFragment(fragment: Fragment, tag: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment_placeholder, fragment, tag)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    //Запрос на выход из приложения
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount == NUMBER_FRAGMENTS) {
             AlertDialog.Builder(this)
