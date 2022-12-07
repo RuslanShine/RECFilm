@@ -11,4 +11,7 @@
     <string name="text_Dialog">Вы хотите выйти?</string>
     <string name="text_Dialog_yes">Да</string>
     <string name="text_Dialog_no">Нет</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_main">Главная</string>
 </resources>

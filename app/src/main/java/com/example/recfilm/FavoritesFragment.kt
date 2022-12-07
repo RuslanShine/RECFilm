@@ -28,6 +28,8 @@ class FavoritesFragment : Fragment() {
         super.onCreate(savedInstanceState)
         val favoritesList: List<Film> = emptyList()
 
+        AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(), 2)
+
         favorites_recycler
             .apply {
                 filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
