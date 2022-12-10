@@ -71,4 +71,29 @@ val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
         onView(withId(R.id.home)).perform(click())
         onView(withId(R.id.home_fragment_root)).check(matches(isDisplayed()))
     }
+
+    @Test
+    fun shouldOpenDetailsFragment (){
+        onView(withId(R.id.main_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<FilmViewHolder>(2,
+            click()
+        ))
+        onView(withId(R.id.app_bar)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun addToFavoritesButtonClickable(){
+        onView(withId(R.id.main_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<FilmViewHolder>(0,
+            click()
+        ))
+        onView(withId(R.id.details_fab_favorites)).perform(click())
+        onView(withId(R.id.details_fab_favorites)).perform(click())
+    }
+
+    @Test
+    fun addToDetailsButtonClickable(){
+        onView(withId(R.id.main_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<FilmViewHolder>(0,
+            click()
+        ))
+        onView(withId(R.id.details_fab_share)).perform(click())
+    }
 }
