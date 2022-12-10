@@ -33,8 +33,6 @@ val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
         onView(withId(R.id.main_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition<FilmViewHolder>(0,click()))
     }
 
-
-
     @Test
     fun searchViewShouldBeAbleToInputText(){
         val testString = "1111111"
@@ -59,4 +57,18 @@ val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
         }
     }
 
+    @Test
+    fun  allMenuDestinationsShouldWork(){
+        onView(withId(R.id.favorites)).perform(click())
+        onView(withId(R.id.favorites_fragment_root)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.watch_later)).perform(click())
+        onView(withId(R.id.watch_later_fragment_root)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.selections)).perform(click())
+        onView(withId(R.id.selections_fragment_root)).check(matches(isDisplayed()))
+
+        onView(withId(R.id.home)).perform(click())
+        onView(withId(R.id.home_fragment_root)).check(matches(isDisplayed()))
+    }
 }
