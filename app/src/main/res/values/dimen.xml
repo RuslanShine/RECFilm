@@ -4,4 +4,10 @@
     <dimen name="margin_search_view">8dp</dimen>
     <dimen name="margin_recycler_view">16dp</dimen>
 
+    <dimen name="layout_height_frameLayout">150dp</dimen>
+    <dimen name="layout_width_poster">150dp</dimen>
+
+    <dimen name="layout_width_ratingDonutView">50dp</dimen>
+    <dimen name="layout_height_ratingDonutView">50dp</dimen>
+
 </resources>

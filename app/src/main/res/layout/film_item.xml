@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="@dimen/layout_height_frameLayout">
 
     <com.example.recfilm.RatingDonutView
         android:id="@+id/rating_donut"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/layout_width_ratingDonutView"
+        android:layout_height="@dimen/layout_height_ratingDonutView"
         android:translationZ="11dp"
-        app:stroke="10"
+        app:stroke="11"
         app:progress="77"
         android:layout_gravity="bottom|left"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
 
             <ImageView
                 android:id="@+id/poster"
-                android:layout_width="150dp"
+                android:layout_width="@dimen/layout_width_poster"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_constraintLeft_toLeftOf="parent"
