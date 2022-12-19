@@ -12,15 +12,30 @@ import android.view.View
 class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: AttributeSet? = null) : View(context, attributeSet) {
 
     private val oval = RectF()
-    private val radius: Float = 0f
+    private var radius: Float = 0f
     private var centerX: Float = 0f
     private var centerY: Float = 0f
     private var stroke = 10f
-    private var progress = 50f
+    private var progress = 50
     private val scaleSize = 60f
     private lateinit var strokePaint: Paint
     private lateinit var digitPaint: Paint
     private lateinit var circlePaint: Paint
+
+    init {
+        //Получаем атрибуты и устанвливаем их в соответствующие поля
+        val a =
+            context.theme.obtainStyledAttributes(attributeSet, R.styleable.RatingDonutView, 0, 0)
+        try {
+            stroke = a.getFloat(
+                R.styleable.RatingDonutView_stroke, stroke)
+            progress = a.getInt(R.styleable.RatingDonutView_progress, progress)
+        } finally {
+            a.recycle()
+        }
+        //Инициализируем первоначальные краски
+        initPaint()
+    }
 
     private fun initPaint() {
         //краска для колец
@@ -47,28 +62,15 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
             style = Paint.Style.FILL
             color = Color.DKGRAY
         }
+
     }
 
-    private fun getPaintColor(progress: Int): Int = when(progress) {
-        in 0 .. 25 -> Color.parseColor("#e84258")
-        in 26 .. 50 -> Color.parseColor("#fd8060")
-        in 51 .. 75 -> Color.parseColor("#fee191")
-        else -> Color.parseColor("#b0d8a4")
-    }
-
-    init {
-        //Получаем атрибуты и устанвливаем их в соответствующие поля
-        val a =
-            context.theme.obtainStyledAttributes(attributeSet, R.styleable.RatingDonutView, 0, 0)
-        try {
-            stroke = a.getFloat(
-                R.styleable.RatingDonutView_stroke, stroke)
-            progress = a.getInt(R.styleable.RatingDonutView_progress, progress).toFloat()
-        } finally {
-            a.recycle()
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        radius = if (width > height) {
+            height.div(2f)
+        } else {
+            width.div(2f)
         }
-        //Инициализируем первоначальные краски
-        initPaint()
     }
 
     override fun onMeasure(widthMeasureSpec: Int,heightMeasureSpec: Int){
@@ -94,29 +96,6 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
             else -> 300
         }
 
-    //рисуем кольцо
-    private fun drawRating (canvas: Canvas){
-        val scale = radius * 0.8f
-        canvas.save()
-        canvas.translate(centerX,centerY)
-        oval.set(0f - scale, 0f -scale, scale,scale)
-        canvas.drawCircle(0f,0f,radius,circlePaint)
-        canvas.drawArc(oval, -90f, convertProgressToDegrees(progress), false, strokePaint)
-        canvas.restore()
-    }
-    //отрисовка арок
-    private fun convertProgressToDegrees(progress: Int): Float = progress * 3.6f
-}
-
-    private fun drawText(canvas: Canvas) {
-        val message = String.format("%.1f", progress / 10f)
-        val widths = FloatArray(message.length)
-        digitPaint.getTextWidths(message, widths)
-        var advance = 0f
-        for (width in widths) advance += width
-        canvas.drawText(message, centerX - advance / 2, centerY  + advance / 4, digitPaint)
-    }
-
     override fun onDraw(canvas: Canvas){
         drawRating(canvas)
         drawText(canvas)
@@ -130,4 +109,34 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         //вызываем перерисовку View
         invalidate()
     }
+
+    //рисуем кольцо
+    private fun drawRating (canvas: Canvas){
+        val scale = radius * 0.8f
+        canvas.save()
+        canvas.translate(centerX,centerY)
+        oval.set(0f - scale, 0f -scale, scale,scale)
+        canvas.drawCircle(0f,0f,radius,circlePaint)
+        canvas.drawArc(oval, -90f, convertProgressToDegrees(progress), false, strokePaint)
+        canvas.restore()
+    }
+
+    private fun drawText(canvas: Canvas) {
+        val message = String.format("%.1f", progress / 10f)
+        val widths = FloatArray(message.length)
+        digitPaint.getTextWidths(message, widths)
+        var advance = 0f
+        for (width in widths) advance += width
+        canvas.drawText(message, centerX - advance / 2, centerY  + advance / 4, digitPaint)
+    }
+
+    private fun getPaintColor(progress: Int): Int = when(progress) {
+        in 0 .. 25 -> Color.parseColor("#e84258")
+        in 26 .. 50 -> Color.parseColor("#fd8060")
+        in 51 .. 75 -> Color.parseColor("#fee191")
+        else -> Color.parseColor("#b0d8a4")
+    }
+
+    //отрисовка арок
+    private fun convertProgressToDegrees(progress: Int): Float = progress * 3.6f
 }
