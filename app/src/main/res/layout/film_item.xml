@@ -9,7 +9,7 @@
         android:id="@+id/rating_donut"
         android:layout_width="@dimen/layout_width_ratingDonutView"
         android:layout_height="@dimen/layout_height_ratingDonutView"
-        android:translationZ="11dp"
+        android:translationZ="@dimen/translationZ_ratingDonutView"
         app:stroke="11"
         app:progress="77"
         android:layout_gravity="bottom|left"
@@ -21,9 +21,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:elevation="1dp"
-        app:cardCornerRadius="10dp">
+        android:layout_margin="@dimen/layout_margin_cardView"
+        android:elevation="@dimen/elevation_cardView"
+        app:cardCornerRadius="@dimen/cardCornerRadius_cardView">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,7 +44,7 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:padding="@dimen/padding_title"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 app:layout_constraintLeft_toRightOf="@+id/poster"
@@ -56,7 +56,7 @@
                 android:id="@+id/description"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:padding="8dp"
+                android:padding="@dimen/padding_description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/poster"
                 app:layout_constraintRight_toRightOf="parent"
