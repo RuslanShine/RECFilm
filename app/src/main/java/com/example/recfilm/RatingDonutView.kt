@@ -21,6 +21,7 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
     private lateinit var strokePaint: Paint
     private lateinit var digitPaint: Paint
     private lateinit var circlePaint: Paint
+    private val STROKE_WIDTH_NUMBERS = 2f
 
     init {
         //Получаем атрибуты и устанвливаем их в соответствующие поля
@@ -49,7 +50,7 @@ class RatingDonutView @JvmOverloads constructor(context: Context, attributeSet: 
         //раска для цифр
         digitPaint = Paint().apply {
             style = Paint.Style.FILL_AND_STROKE
-            strokeWidth = 2f
+            strokeWidth = STROKE_WIDTH_NUMBERS
             setShadowLayer(5f,0f,0f,Color.DKGRAY)
             textSize = scaleSize
             typeface = Typeface.SANS_SERIF
