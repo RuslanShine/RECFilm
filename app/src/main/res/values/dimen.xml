@@ -4,4 +4,28 @@
     <dimen name="margin_search_view">8dp</dimen>
     <dimen name="margin_recycler_view">16dp</dimen>
 
+    <dimen name="layout_height_frameLayout">150dp</dimen>
+    <dimen name="layout_width_poster">150dp</dimen>
+
+    <dimen name="layout_width_ratingDonutView">50dp</dimen>
+    <dimen name="layout_height_ratingDonutView">50dp</dimen>
+    
+    <dimen name="layout_margin_cardView">8dp</dimen>
+    <dimen name="elevation_cardView">1dp</dimen>
+    <dimen name="cardCornerRadius_cardView">10dp</dimen>
+
+    <dimen name="padding_title">8dp</dimen>
+
+    <dimen name="padding_description">8dp</dimen>
+
+    <dimen name="translationZ_ratingDonutView">71dp</dimen>
+
+    //fragment_details
+    <dimen name="minHeight_toolbar_layout">60dp</dimen>
+    <dimen name="layout_height_app_bar">200dp</dimen>
+
+    <dimen name="layout_margin_details_fab_share">16dp</dimen>
+    <dimen name="layout_margin_details_fab_favorites">16dp</dimen>
+    <dimen name="layout_margin_details_description">8dp</dimen>
+
 </resources>
