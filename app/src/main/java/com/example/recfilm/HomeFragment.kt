@@ -14,12 +14,14 @@ import androidx.transition.Scene
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
+import com.example.recfilm.databinding.FragmentHomeBinding
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
 class HomeFragment : Fragment() {
-
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
+
     val filmsDataBase = listOf(
         Film(
             "Interstellar",
@@ -74,7 +76,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater,container,false)
+        return binding.root
 
     }
 

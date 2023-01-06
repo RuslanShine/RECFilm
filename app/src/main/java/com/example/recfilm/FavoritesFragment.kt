@@ -8,19 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recfilm.databinding.FragmentFavoritesBinding
 import kotlinx.android.synthetic.main.fragment_favorites.*
 
 
 class FavoritesFragment : Fragment() {
-
+    private lateinit var binding: FragmentFavoritesBinding
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorites, container, false)
+        binding = FragmentFavoritesBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
 
@@ -30,7 +31,7 @@ class FavoritesFragment : Fragment() {
 
         AnimationHelper.performFragmentCircularRevealAnimation(favorites_fragment_root, requireActivity(), 2)
 
-        favorites_recycler
+        binding.favoritesRecycler
             .apply {
                 filmsAdapter = FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
