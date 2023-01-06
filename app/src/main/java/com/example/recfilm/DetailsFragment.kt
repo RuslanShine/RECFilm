@@ -65,7 +65,7 @@ class DetailsFragment : Fragment() {
         //Устанавливаем картинку
         binding.detailsPoster.setImageResource(film.poster)
         //Устанавливаем описание
-        details_description.text = film.description
+        binding.detailsDescription.text = film.description
 
         binding.detailsFabFavorites.setImageResource(
             if (film.isInFavorites) R.drawable.ic_baseline_favorite_24
