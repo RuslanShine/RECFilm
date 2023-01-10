@@ -13,15 +13,23 @@ import com.example.recfilm.databinding.FragmentDetailsBinding
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
-    private lateinit var binding: FragmentDetailsBinding
+    private var _binding: FragmentDetailsBinding? = null
+    private val binding: FragmentDetailsBinding
+        get() = _binding!!
+
     private lateinit var film: Film
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentDetailsBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

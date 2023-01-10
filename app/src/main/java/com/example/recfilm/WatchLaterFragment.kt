@@ -9,14 +9,21 @@ import com.example.recfilm.databinding.FragmentWatchLaterBinding
 import kotlinx.android.synthetic.main.fragment_watch_later.*
 
 class WatchLaterFragment : Fragment() {
-    private lateinit var binding: FragmentWatchLaterBinding
+    private var _binding: FragmentWatchLaterBinding? = null
+    private val binding: FragmentWatchLaterBinding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentWatchLaterBinding.inflate(inflater,container,false)
+    ): View {
+        _binding = FragmentWatchLaterBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
