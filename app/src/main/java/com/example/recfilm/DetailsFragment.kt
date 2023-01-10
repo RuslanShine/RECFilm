@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.recfilm.databinding.FragmentDetailsBinding
-import kotlinx.android.synthetic.main.fragment_details.*
+
 
 class DetailsFragment : Fragment() {
     private var _binding: FragmentDetailsBinding? = null

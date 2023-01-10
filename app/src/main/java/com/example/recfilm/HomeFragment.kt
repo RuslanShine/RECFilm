@@ -15,7 +15,6 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import com.example.recfilm.databinding.FragmentHomeBinding
-import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
 class HomeFragment : Fragment() {
@@ -104,12 +103,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         AnimationHelper.performFragmentCircularRevealAnimation(
-            home_fragment_root,
+            binding.homeFragmentRoot,
             requireActivity(),
             1
         )
 
-        main_recycler.apply {
+        binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
                     override fun click(film: Film) {
@@ -125,12 +124,12 @@ class HomeFragment : Fragment() {
         filmsAdapter.addItems(filmsDataBase)
 
         //нажатие на поле "поиск" целиком
-        search_view.setOnClickListener {
-            search_view.isIconified = false
+            binding.searchView.setOnClickListener {
+                binding.searchView.isIconified = false
         }
 
         //Слушатель изменений введенного текста
-        search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             // Обработка нажатия "поиск" на клавиатуре
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true

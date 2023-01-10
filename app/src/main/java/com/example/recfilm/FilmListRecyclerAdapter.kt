@@ -3,7 +3,8 @@ package com.example.recfilm
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.film_item.view.*
+import com.example.recfilm.databinding.FilmItemBinding
+
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -15,7 +16,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FilmViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.film_item, parent, false))
+        return FilmViewHolder(FilmItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     //В этом методе будет привзяка полей из объекта Film, к view из film_item.xml
@@ -29,7 +30,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
                 //Обрабатываем нажатие на весь элемент целиком(можно сделать на отдельный элемент
                 //напрмер, картинку) и вызываем метод нашего листенера, который мы получаем из
                 //конструктора адаптера
-                holder.itemView.item_container.setOnClickListener {
+                holder.binding.itemContainer.setOnClickListener {
                     clickListener.click(items[position])
                 }
             }
