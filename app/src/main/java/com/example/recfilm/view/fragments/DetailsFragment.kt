@@ -1,15 +1,14 @@
-package com.example.recfilm
+package com.example.recfilm.view.fragments
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.Slide
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.recfilm.R
 import com.example.recfilm.databinding.FragmentDetailsBinding
+import com.example.recfilm.domain.Film
 
 
 class DetailsFragment : Fragment() {

@@ -1,20 +1,19 @@
-package com.example.recfilm
+package com.example.recfilm.view.fragments
 
 import android.os.Bundle
-import android.view.Gravity
-import android.view.Gravity.apply
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.GravityCompat.apply
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.Scene
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
+import com.example.recfilm.R
 import com.example.recfilm.databinding.FragmentHomeBinding
+import com.example.recfilm.domain.Film
+import com.example.recfilm.utils.AnimationHelper
+import com.example.recfilm.view.rv_adapters.FilmListRecyclerAdapter
+import com.example.recfilm.view.MainActivity
+import com.example.recfilm.view.rv_adapters.TopSpacingItemDecoration
 import java.util.*
 
 class HomeFragment : Fragment() {

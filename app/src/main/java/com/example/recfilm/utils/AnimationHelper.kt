@@ -1,4 +1,4 @@
-package com.example.recfilm
+package com.example.recfilm.utils
 
 import android.app.Activity
 import android.view.View

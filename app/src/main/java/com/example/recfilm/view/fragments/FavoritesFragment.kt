@@ -1,15 +1,17 @@
-package com.example.recfilm
+package com.example.recfilm.view.fragments
 
 import android.os.Bundle
-import android.transition.Slide
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recfilm.databinding.FragmentFavoritesBinding
-
+import com.example.recfilm.domain.Film
+import com.example.recfilm.utils.AnimationHelper
+import com.example.recfilm.view.rv_adapters.FilmListRecyclerAdapter
+import com.example.recfilm.view.MainActivity
+import com.example.recfilm.view.rv_adapters.TopSpacingItemDecoration
 
 
 class FavoritesFragment : Fragment() {

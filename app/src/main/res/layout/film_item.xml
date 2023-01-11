@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/layout_height_frameLayout">
 
-    <com.example.recfilm.RatingDonutView
+    <com.example.recfilm.view.customviews.RatingDonutView
         android:id="@+id/rating_donut"
         android:layout_width="@dimen/layout_width_ratingDonutView"
         android:layout_height="@dimen/layout_height_ratingDonutView"
