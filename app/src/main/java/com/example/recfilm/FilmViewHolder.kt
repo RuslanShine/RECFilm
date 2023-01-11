@@ -3,17 +3,18 @@ package com.example.recfilm
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.film_item.view.*
+import com.example.recfilm.databinding.FilmItemBinding
 
-class FilmViewHolder(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val title = itemView.title
-    private val poster = itemView.poster
-    private val description = itemView.description
-    private val ratingDonut = itemView.rating_donut
+
+class FilmViewHolder(val binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    private val title = binding.title
+    private val poster = binding.poster
+    private val description = binding.description
+    private val ratingDonut = binding.ratingDonut
 
     fun bind(film: Film) {
         title.text = film.title
-        Glide.with(itemView)
+        Glide.with(binding.root)
             .load(film.poster)
             .centerCrop()
             .into(poster)

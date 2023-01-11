@@ -11,3 +11,6 @@ data class Film(
     var rating: Float = 0f,
     var isInFavorites: Boolean = false
 ): Parcelable
+
+
+
