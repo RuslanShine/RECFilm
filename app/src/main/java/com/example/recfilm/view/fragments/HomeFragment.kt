@@ -22,16 +22,17 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
         get() = _binding!!
-    private lateinit var filmsAdapter: FilmListRecyclerAdapter
+
     private var filmsDataBase = listOf<Film>()
-    set(value) {
-        if (field == value)return
-        field=value
-        filmsAdapter.addItems(field)
-    }
+        set(value) {
+            if (field == value) return
+            field = value
+            filmsAdapter.addItems(field)
+        }
 
     override fun onDestroy() {
         _binding = null
@@ -55,9 +56,7 @@ class HomeFragment : Fragment() {
             1
         )
 
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner, Observer<List<Film>> {
-            filmsDataBase = it
-        })
+
 
         binding.mainRecycler.apply {
             filmsAdapter =
@@ -105,5 +104,10 @@ class HomeFragment : Fragment() {
             }
         })
 
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
+            filmsDataBase = it
+        }
+
     }
+
 }
