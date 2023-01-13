@@ -75,20 +75,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.settings -> {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.menu_settings_toast),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                    true
-                }
-                else -> false
-            }
-        }
+//        binding.topAppBar.setOnMenuItemClickListener {
+//            when (it.itemId) {
+//                R.id.settings -> {
+//                    Toast.makeText(
+//                        this,
+//                        getString(R.string.menu_settings_toast),
+//                        Toast.LENGTH_SHORT
+//                    )
+//                        .show()
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
     }
 
     //Ищем фрагмент по тэгу, если он есть то возвращаем его, если нет - то null
