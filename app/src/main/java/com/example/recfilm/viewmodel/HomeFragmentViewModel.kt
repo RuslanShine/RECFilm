@@ -7,7 +7,10 @@ import com.example.recfilm.domain.Film
 import com.example.recfilm.domain.Interactor
 
 class HomeFragmentViewModel: ViewModel() {
-    val filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
+   private val _filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
+    val filmsListLiveData: MutableLiveData <List<Film>>
+    get() = _filmsListLiveData
+
     private var interactor: Interactor = App.instance.interactor
 
     init {

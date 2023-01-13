@@ -19,6 +19,8 @@ import com.example.recfilm.viewmodel.HomeFragmentViewModel
 import java.util.*
 
 class HomeFragment : Fragment() {
+    private val POSITION_ANIMATION_HELPER = 1
+    private val  TOP_SPACING_ITEM = 8
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
@@ -53,10 +55,8 @@ class HomeFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(
             binding.homeFragmentRoot,
             requireActivity(),
-            1
+            POSITION_ANIMATION_HELPER
         )
-
-
 
         binding.mainRecycler.apply {
             filmsAdapter =
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                 })
             adapter = filmsAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            val decorator = TopSpacingItemDecoration(8)
+            val decorator = TopSpacingItemDecoration(TOP_SPACING_ITEM)
             addItemDecoration(decorator)
         }
 
