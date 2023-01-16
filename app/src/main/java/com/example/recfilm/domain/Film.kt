@@ -1,4 +1,4 @@
-package com.example.recfilm
+package com.example.recfilm.domain
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

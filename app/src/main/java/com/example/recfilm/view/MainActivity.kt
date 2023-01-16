@@ -1,14 +1,14 @@
-package com.example.recfilm
+package com.example.recfilm.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recfilm.R
 import com.example.recfilm.databinding.ActivityMainBinding
+import com.example.recfilm.domain.Film
+import com.example.recfilm.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -75,20 +75,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.topAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.settings -> {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.menu_settings_toast),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                    true
-                }
-                else -> false
-            }
-        }
+//        binding.topAppBar.setOnMenuItemClickListener {
+//            when (it.itemId) {
+//                R.id.settings -> {
+//                    Toast.makeText(
+//                        this,
+//                        getString(R.string.menu_settings_toast),
+//                        Toast.LENGTH_SHORT
+//                    )
+//                        .show()
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
     }
 
     //Ищем фрагмент по тэгу, если он есть то возвращаем его, если нет - то null

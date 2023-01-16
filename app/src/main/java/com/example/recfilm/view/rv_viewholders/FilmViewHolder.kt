@@ -1,9 +1,9 @@
-package com.example.recfilm
+package com.example.recfilm.view.rv_viewholders
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.recfilm.databinding.FilmItemBinding
+import com.example.recfilm.domain.Film
 
 
 class FilmViewHolder(val binding: FilmItemBinding) : RecyclerView.ViewHolder(binding.root) {

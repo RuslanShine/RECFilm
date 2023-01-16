@@ -1,9 +1,11 @@
-package com.example.recfilm
+package com.example.recfilm.view.rv_adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recfilm.databinding.FilmItemBinding
+import com.example.recfilm.domain.Film
+import com.example.recfilm.view.rv_viewholders.FilmViewHolder
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити

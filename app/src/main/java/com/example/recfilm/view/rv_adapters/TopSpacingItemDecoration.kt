@@ -1,4 +1,4 @@
-package com.example.recfilm
+package com.example.recfilm.view.rv_adapters
 
 import android.content.res.Resources
 import android.graphics.Rect
