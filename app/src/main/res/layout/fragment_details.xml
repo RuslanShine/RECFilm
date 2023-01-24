@@ -65,7 +65,7 @@
         android:layout_margin="@dimen/layout_margin_details_fab_favorites"
         android:backgroundTint="@color/purple_500"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|left"
+        app:layout_anchorGravity="left|bottom"
         app:srcCompat="@drawable/ic_baseline_favorite_border_24"
         android:tint="@android:color/white"/>
 

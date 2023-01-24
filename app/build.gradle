@@ -8,17 +8,15 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     namespace 'com.example.recfilm'
-    compileSdk 32
+    compileSdk 33
 
     buildFeatures {
         viewBinding true
-        
     }
-
     defaultConfig {
         applicationId "com.example.recfilm"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -60,6 +58,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.6.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.12.6"
 
 
 

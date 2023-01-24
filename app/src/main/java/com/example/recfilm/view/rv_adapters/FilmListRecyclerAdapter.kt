@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recfilm.databinding.FilmItemBinding
 import com.example.recfilm.domain.Film
 import com.example.recfilm.view.rv_viewholders.FilmViewHolder
+import kotlinx.android.synthetic.main.film_item.view.*
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
 class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     //Здесь у нас хранится список элементов для RV
     private val items = mutableListOf<Film>()
 
@@ -32,7 +34,7 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
                 //Обрабатываем нажатие на весь элемент целиком(можно сделать на отдельный элемент
                 //напрмер, картинку) и вызываем метод нашего листенера, который мы получаем из
                 //конструктора адаптера
-                holder.binding.itemContainer.setOnClickListener {
+                holder.itemView.item_container.setOnClickListener {
                     clickListener.click(items[position])
                 }
             }

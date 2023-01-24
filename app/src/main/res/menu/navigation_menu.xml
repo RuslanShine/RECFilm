@@ -8,7 +8,7 @@
     <item
         android:id="@+id/favorites"
         android:icon="@drawable/ic_round_favorite"
-        android:title="@string/menu_favorites_title"
+        android:title="@string/menu_favorites_title_text"
         app:showAsAction="withText"/>
     <item
         android:id="@+id/watch_later"
