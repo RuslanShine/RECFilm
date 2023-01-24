@@ -2,7 +2,7 @@
     <string name="app_name">RecFilm</string>
     <string name="menu_selections_title">Подборки</string>
     <string name="menu_watch_later_title">Смотреть позже</string>
-    <string name="menu_favorites_title">Избранное</string>
+    <string name="menu_favorites_title_text">Избранное</string>
     <string name="menu_settings">Настройки</string>
     <string name="menu_watch_later">Посмотреть позже</string>
     <string name="menu_selections">Подборки</string>

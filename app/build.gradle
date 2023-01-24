@@ -12,9 +12,7 @@ android {
 
     buildFeatures {
         viewBinding true
-        
     }
-
     defaultConfig {
         applicationId "com.example.recfilm"
         minSdk 21

@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit
 class App : Application() {
     lateinit var repo: MainRepository
     lateinit var interactor: Interactor
+    private val CALL_TIMEOUT: Long = 30
+    private val READ_TIMOUT: Long = 30
 
     override fun onCreate() {
         super.onCreate()
@@ -24,8 +26,8 @@ class App : Application() {
         repo = MainRepository()
         //Создаём кастомный киент
         val okHttpClient = OkHttpClient.Builder()
-            .callTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
+            .callTimeout(CALL_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(READ_TIMOUT, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 if (BuildConfig.DEBUG) {
                     level = HttpLoggingInterceptor.Level.BASIC
