@@ -3,22 +3,27 @@ package com.example.recfilm.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.recfilm.App
 import com.example.recfilm.domain.Film
 import com.example.recfilm.domain.Interactor
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import javax.inject.Inject
 
 
-class HomeFragmentViewModel : ViewModel(), KoinComponent {
+class HomeFragmentViewModel : ViewModel() {
+    private val FILM_PAGE_ONE = 1
     private val _filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
     val filmsListLiveData: LiveData<List<Film>>
         get() = _filmsListLiveData
 
     //Инициализируем интерактор
-    private val interactor: Interactor by inject()
+    @Inject
+    lateinit var interactor: Interactor
 
     init {
-        interactor.getFilmsFromApi(1, object : ApiCallback {
+        App.instance.dagger.inject(this)
+        interactor.getFilmsFromApi(FILM_PAGE_ONE, object : ApiCallback {
             override fun onSuccess(films: List<Film>) {
                 _filmsListLiveData.postValue(films)
             }
