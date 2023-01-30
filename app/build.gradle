@@ -5,6 +5,7 @@ plugins {
 }
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'com.example.recfilm'
@@ -67,6 +68,9 @@ dependencies {
     //Koin
     implementation "io.insert-koin:koin-android:2.0.1"
 
+    //Dagger
+    implementation 'com.google.dagger:dagger:2.28'
+    kapt 'com.google.dagger:dagger-compiler:2.28'
 
 
 }
