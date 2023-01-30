@@ -5,6 +5,7 @@ import android.app.Application
 import com.example.recfilm.data.ApiConstants
 import com.example.recfilm.data.MainRepository
 import com.example.recfilm.data.TmdbApi
+import com.example.recfilm.di.AppComponent
 import com.example.recfilm.di.DI
 import com.example.recfilm.domain.Interactor
 import okhttp3.OkHttpClient
@@ -17,13 +18,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class App : Application() {
+    lateinit var dagger: AppComponent
 
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            androidContext(this@App)
-            androidLogger()
-            modules(listOf(DI.mainModule))
-        }
+        instance = this
+        //Создаём компанент
+        dagger = DaggerAppComponent.create()
+    }
+
+    companion object{
+        lateinit var instance: App
+        private set
     }
 }

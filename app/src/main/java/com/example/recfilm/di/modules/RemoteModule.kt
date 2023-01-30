@@ -14,11 +14,14 @@ import javax.inject.Singleton
 
 @Module
 class RemoteModule {
+    private val CALL_TIMEOUT_SECONDS: Long = 30
+    private val READ_TIMEOUT_SECONDS: Long = 30
+
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
-        .callTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
+        .callTimeout(CALL_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(READ_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .addInterceptor(HttpLoggingInterceptor().apply {
             if (BuildConfig.DEBUG) {
                 level = HttpLoggingInterceptor.Level.BASIC
