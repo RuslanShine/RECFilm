@@ -11,6 +11,5 @@ import javax.inject.Singleton
 class DomainModule {
     @Provides
     @Singleton
-    fun provideInteractor(repository: MainRepository, tmdbApi: TmdbApi) =
-        Interactor(repo = repository, retrofitService = tmdbApi)
+    fun provideInteractor(repository: MainRepository, tmdbApi: TmdbApi) = Interactor(repo = repository, retrofitService = tmdbApi)
 }

@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.recfilm.App
 import com.example.recfilm.domain.Film
 import com.example.recfilm.domain.Interactor
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import javax.inject.Inject
 
 

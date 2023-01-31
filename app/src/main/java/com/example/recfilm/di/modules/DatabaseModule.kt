@@ -6,7 +6,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DatabaseModules {
+class DatabaseModule {
     @Provides
     @Singleton
     fun provideRepository() = MainRepository()
