@@ -8,9 +8,9 @@ import com.example.recfilm.domain.Film
 import com.example.recfilm.domain.Interactor
 import javax.inject.Inject
 
+const val FILM_PAGE_ONE = 1
 
 class HomeFragmentViewModel : ViewModel() {
-    private val FILM_PAGE_ONE = 1
     private val _filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
     val filmsListLiveData: LiveData<List<Film>>
         get() = _filmsListLiveData
