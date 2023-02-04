@@ -58,6 +58,7 @@ class HomeFragment : Fragment() {
             POSITION_ANIMATION_HELPER
         )
 
+
         binding.mainRecycler.apply {
             filmsAdapter =
                 FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
@@ -106,6 +107,19 @@ class HomeFragment : Fragment() {
 
         viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
             filmsDataBase = it
+            filmsAdapter.addItems(it)
+        }
+
+        private fun initPullToRefresh() {
+            //Вешаем слушатель, чтобы вызвался pull to refresh
+            binding.pullToRefresh.setOnRefreshListener {
+                //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+                filmsAdapter.items.clear()
+                //Делаем новый запрос фильмов на сервер
+                viewModel.getFilms()
+                //Убираем крутящееся колечко
+                binding.pullToRefresh.isRefreshing = false
+            }
         }
 
     }
