@@ -63,10 +63,12 @@ class HomeFragment : Fragment() {
         //находим наш RV
         initRecyckler()
         //Кладем нашу БД в RV
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             filmsDataBase = it
             filmsAdapter.addItems(it)
-        }
+        })
+
+
     }
 
     private fun initPullToRefresh() {

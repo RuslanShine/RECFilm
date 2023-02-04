@@ -12,6 +12,7 @@ import com.example.recfilm.databinding.FragmentSettingsBinding
 import com.example.recfilm.utils.AnimationHelper
 import com.example.recfilm.viewmodel.SettingsFragmentViewModel
 import kotlinx.android.synthetic.main.fragment_selections.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 
 
 class SettingsFragment : Fragment() {
@@ -32,21 +33,20 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        AnimationHelper.performFragmentCircularRevealAnimation(selections_fragment_root,
-            requireActivity(),
-            5)
-        viewModel.categoryPropertyLifeData.observe(viewLifecycleOwner, Observer<String>
-        {
-            when (it) {
+        //Подключаем анимации и передаем номер позиции у кнопки в нижнем меню
+        AnimationHelper.performFragmentCircularRevealAnimation(settings_fragment_root, requireActivity(), 5)
+        //Слушаем, какой у нас сейчас выбран вариант в настройках
+        viewModel.categoryPropertyLifeData.observe(viewLifecycleOwner, Observer<String> {
+            when(it) {
                 POPULAR_CATEGORY -> binding.radioGroup.check(R.id.radio_popular)
                 TOP_RATED_CATEGORY -> binding.radioGroup.check(R.id.radio_top_rated)
                 UPCOMING_CATEGORY -> binding.radioGroup.check(R.id.radio_upcoming)
                 NOW_PLAYING_CATEGORY -> binding.radioGroup.check(R.id.radio_now_playing)
             }
         })
+        //Слушатель для отправки нового состояния в настройки
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
+            when(checkedId) {
                 R.id.radio_popular -> viewModel.putCategoryProperty(POPULAR_CATEGORY)
                 R.id.radio_top_rated -> viewModel.putCategoryProperty(TOP_RATED_CATEGORY)
                 R.id.radio_upcoming -> viewModel.putCategoryProperty(UPCOMING_CATEGORY)
