@@ -20,7 +20,7 @@ import java.util.*
 
 class HomeFragment : Fragment() {
     private val POSITION_ANIMATION_HELPER = 1
-    private val  TOP_SPACING_ITEM = 8
+    private val TOP_SPACING_ITEM = 8
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -58,22 +58,30 @@ class HomeFragment : Fragment() {
             POSITION_ANIMATION_HELPER
         )
 
-
-        binding.mainRecycler.apply {
-            filmsAdapter =
-                FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
-                    override fun click(film: Film) {
-                        (requireActivity() as MainActivity).launchDetailsFragment(film)
-                    }
-                })
-            adapter = filmsAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-            val decorator = TopSpacingItemDecoration(TOP_SPACING_ITEM)
-            addItemDecoration(decorator)
+        initSearchView()
+        initPullToRefresh()
+        //находим наш RV
+        initRecyckler()
+        //Кладем нашу БД в RV
+        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
+            filmsDataBase = it
+            filmsAdapter.addItems(it)
         }
+    }
 
-        filmsAdapter.addItems(filmsDataBase)
+    private fun initPullToRefresh() {
+        //Вешаем слушатель, чтобы вызвался pull to refresh
+        binding.pullToRefresh.setOnRefreshListener {
+            //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
+            filmsAdapter.items.clear()
+            //Делаем новый запрос фильмов на сервер
+            viewModel.getFilms()
+            //Убираем крутящееся колечко
+            binding.pullToRefresh.isRefreshing = false
+        }
+    }
 
+    private fun initSearchView() {
         //нажатие на поле "поиск" целиком
         binding.searchView.setOnClickListener {
             binding.searchView.isIconified = false
@@ -104,24 +112,24 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
+    }
 
-        viewModel.filmsListLiveData.observe(viewLifecycleOwner) {
-            filmsDataBase = it
-            filmsAdapter.addItems(it)
+    private fun initRecyckler() {
+        binding.mainRecycler.apply {
+            filmsAdapter =
+                FilmListRecyclerAdapter(object : FilmListRecyclerAdapter.OnItemClickListener {
+                    override fun click(film: Film) {
+                        (requireActivity() as MainActivity).launchDetailsFragment(film)
+                    }
+                })
+            adapter = filmsAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            val decorator = TopSpacingItemDecoration(TOP_SPACING_ITEM)
+            addItemDecoration(decorator)
         }
 
-        private fun initPullToRefresh() {
-            //Вешаем слушатель, чтобы вызвался pull to refresh
-            binding.pullToRefresh.setOnRefreshListener {
-                //Чистим адаптер(items нужно будет сделать паблик или создать для этого публичный метод)
-                filmsAdapter.items.clear()
-                //Делаем новый запрос фильмов на сервер
-                viewModel.getFilms()
-                //Убираем крутящееся колечко
-                binding.pullToRefresh.isRefreshing = false
-            }
-        }
-
+//        filmsAdapter.addItems(filmsDataBase)
     }
 
 }
+
