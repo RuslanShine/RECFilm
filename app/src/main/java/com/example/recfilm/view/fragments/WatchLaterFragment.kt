@@ -15,7 +15,7 @@ class WatchLaterFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentWatchLaterBinding.inflate(inflater, container, false)
         return binding.root

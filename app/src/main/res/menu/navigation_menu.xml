@@ -20,4 +20,10 @@
         android:icon="@drawable/ic_round_video_library"
         android:title="@string/menu_selections_title"
         app:showAsAction="withText"/>
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_round_settings_24"
+        android:title="@string/menu_settings_title_text"
+        app:showAsAction="withText"/>
+
 </menu>
