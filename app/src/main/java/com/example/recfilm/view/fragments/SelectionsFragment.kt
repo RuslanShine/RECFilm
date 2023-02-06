@@ -10,6 +10,7 @@ import com.example.recfilm.utils.AnimationHelper
 
 
 class SelectionsFragment : Fragment() {
+    private val ANIMATORHELPER_POSITION = 4
     private var _binding: FragmentSelectionsBinding? = null
     private val binding: FragmentSelectionsBinding
         get() = _binding!!
@@ -32,7 +33,7 @@ class SelectionsFragment : Fragment() {
         AnimationHelper.performFragmentCircularRevealAnimation(
             binding.selectionsFragmentRoot,
             requireActivity(),
-            4
+            ANIMATORHELPER_POSITION
         )
     }
 }

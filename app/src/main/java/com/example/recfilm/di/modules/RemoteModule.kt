@@ -14,8 +14,8 @@ import javax.inject.Singleton
 
 @Module
 class RemoteModule {
-    private val CALL_TIMEOUT_SECONDS:Long = 30
-    private val READ_TIMEOUT_SECONDS:Long = 30
+    private val CALL_TIMEOUT_SECONDS: Long = 30
+    private val READ_TIMEOUT_SECONDS: Long = 30
 
     @Provides
     @Singleton

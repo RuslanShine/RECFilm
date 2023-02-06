@@ -10,7 +10,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class DomainModule (val context: Context){
+class DomainModule(val context: Context) {
     @Provides
     fun provideContext() = context
 
@@ -20,5 +20,9 @@ class DomainModule (val context: Context){
 
     @Singleton
     @Provides
-    fun provideInteractor(repository: MainRepository, tmdbApi: TmdbApi, preferenceProvider: PreferenceProvider) = Interactor(repo = repository, retrofitService = tmdbApi, preferences = preferenceProvider)
+    fun provideInteractor(
+        repository: MainRepository,
+        tmdbApi: TmdbApi,
+        preferenceProvider: PreferenceProvider,
+    ) = Interactor(repo = repository, retrofitService = tmdbApi, preferences = preferenceProvider)
 }

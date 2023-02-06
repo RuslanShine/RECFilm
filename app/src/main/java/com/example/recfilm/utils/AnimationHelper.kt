@@ -11,6 +11,7 @@ import kotlin.math.roundToInt
 object AnimationHelper {
     //расхождение круга от иконки
     private const val MENU_ITEMS = 5
+
     fun performFragmentCircularRevealAnimation(rootView: View, activity: Activity, position: Int) {
         //Новый тред
         Executors.newSingleThreadExecutor().execute {

@@ -12,7 +12,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Interactor(
-    private val repo: MainRepository, private val retrofitService: TmdbApi, private val preferences: PreferenceProvider) {
+    private val repo: MainRepository,
+    private val retrofitService: TmdbApi,
+    private val preferences: PreferenceProvider,
+) {
 
     fun getFilmsFromApi(page: Int, callback: HomeFragmentViewModel.ApiCallback) {
         retrofitService.getFilms(getDefaultCategoryFromPreferences(), API.KEY, "ru-RU", page)

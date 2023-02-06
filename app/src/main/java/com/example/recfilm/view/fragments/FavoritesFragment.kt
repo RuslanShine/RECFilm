@@ -15,6 +15,7 @@ import com.example.recfilm.view.rv_adapters.TopSpacingItemDecoration
 
 
 class FavoritesFragment : Fragment() {
+    private val PADDINGLNDP_DECORATOR = 8
     private var _binding: FragmentFavoritesBinding? = null
     private val binding: FragmentFavoritesBinding
         get() = _binding!!
@@ -49,7 +50,7 @@ class FavoritesFragment : Fragment() {
                 })
                 adapter = filmsAdapter
                 layoutManager = LinearLayoutManager(requireContext())
-                val decorator = TopSpacingItemDecoration(8)
+                val decorator = TopSpacingItemDecoration(PADDINGLNDP_DECORATOR)
                 addItemDecoration(decorator)
              }
         filmsAdapter.addItems(favoritesList)

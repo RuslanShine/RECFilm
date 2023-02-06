@@ -10,7 +10,8 @@ import kotlinx.android.synthetic.main.film_item.view.*
 
 
 //в параметр передаем слушатель, чтобы мы потом могли обрабатывать нажатия из класса активити
-class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     //Здесь у нас хранится список элементов для RV
     val items = mutableListOf<Film>()
@@ -20,7 +21,9 @@ class FilmListRecyclerAdapter(private val clickListener: OnItemClickListener) : 
 
     //В этом методе мы привязываем наш view holder и передаем туда "надутую" верстку нашего фильма
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return FilmViewHolder(FilmItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return FilmViewHolder(FilmItemBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false))
     }
 
     //В этом методе будет привзяка полей из объекта Film, к view из film_item.xml

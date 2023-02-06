@@ -7,7 +7,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TmdbApi {
-    @GET("3/movie/popular")
+    @GET("3/movie/{category}")
     fun getFilms(
         @Path("category") category: String,
         @Query("api_key") apiKey: String,

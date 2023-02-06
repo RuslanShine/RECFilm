@@ -18,12 +18,12 @@ class SettingsFragmentViewModel : ViewModel() {
         getCategoryProperty()
     }
 
-    private fun getCategoryProperty(){
+    private fun getCategoryProperty() {
         //Кладем категорию в LiveData
         categoryPropertyLifeData.value = interactor.getDefaultCategoryFromPreferences()
     }
 
-    fun putCategoryProperty(category:String){
+    fun putCategoryProperty(category: String) {
         //Сохраняем в настройки
         interactor.saveDefaultCategoryToPreferences(category)
         //И сразу забираем, чтобы сохранить состояние в модели

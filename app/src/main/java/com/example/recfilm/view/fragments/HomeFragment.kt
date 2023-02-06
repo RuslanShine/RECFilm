@@ -67,8 +67,6 @@ class HomeFragment : Fragment() {
             filmsDataBase = it
             filmsAdapter.addItems(it)
         })
-
-
     }
 
     private fun initPullToRefresh() {
@@ -129,9 +127,7 @@ class HomeFragment : Fragment() {
             val decorator = TopSpacingItemDecoration(TOP_SPACING_ITEM)
             addItemDecoration(decorator)
         }
-
 //        filmsAdapter.addItems(filmsDataBase)
     }
-
 }
 
