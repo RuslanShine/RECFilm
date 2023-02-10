@@ -15,6 +15,8 @@ class HomeFragmentViewModel : ViewModel() {
     val filmsListLiveData: LiveData<List<Film>>
         get() = _filmsListLiveData
 
+
+
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
@@ -30,8 +32,11 @@ class HomeFragmentViewModel : ViewModel() {
                 _filmsListLiveData.postValue(films)
             }
 
+            //Кладём фильмы из БД в LiveData, чтобы на UI появился список фильмов
             override fun onFailure() {
+                _filmsListLiveData.postValue(interactor.getFilmsFromDB())
             }
+
         })
     }
 
