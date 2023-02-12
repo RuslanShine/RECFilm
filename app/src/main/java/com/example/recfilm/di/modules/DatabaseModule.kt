@@ -14,7 +14,7 @@ class DatabaseModule {
     @Provides
     fun provideDatabaseHelper(context: Context) = DatabaseHelper(context)
 
-    @Provides
     @Singleton
+    @Provides
     fun provideRepository(databaseHelper: DatabaseHelper) = MainRepository(databaseHelper)
 }

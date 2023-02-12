@@ -15,8 +15,6 @@ class HomeFragmentViewModel : ViewModel() {
     val filmsListLiveData: LiveData<List<Film>>
         get() = _filmsListLiveData
 
-
-
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor

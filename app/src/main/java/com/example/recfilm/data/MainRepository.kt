@@ -5,7 +5,6 @@ import android.database.Cursor
 import com.example.recfilm.data.db.DatabaseHelper
 import com.example.recfilm.domain.Film
 
-
 class MainRepository(databaseHelper: DatabaseHelper) {
     //Инициализируем объект для взаимодействии с БД
     private val sqlDb = databaseHelper.readableDatabase
@@ -31,22 +30,29 @@ class MainRepository(databaseHelper: DatabaseHelper) {
     //Достём фильмы из БД
     fun getAllFromDB(): List<Film> {
         //Создаём курсор на основании запроса "Получить всё из таблицы"
-        cursor = sqlDb.rawQuery("SELECT*FROM ${DatabaseHelper.TABLE_NAME}", null)
+        cursor = sqlDb.rawQuery("SELECT * FROM ${DatabaseHelper.TABLE_NAME}", null)
         //Сюда сохраняем результат получения данный
         val result = mutableListOf<Film>()
         //Проверяем, есть ли хоть однастрока в ответе на запроса
         if (cursor.moveToFirst()) {
             //Инициализируем по таблице пока есть записи, и создаём на основании объект Film
             do {
-                val title = cursor.getString(1)
-                val poster = cursor.getString(2)
-                val description = cursor.getString(3)
-                val rating = cursor.getDouble(4)
+                val title = cursor.getString(COLUMN_INDEX_TITLE)
+                val poster = cursor.getString(COLUMN_INDEX_POSTER)
+                val description = cursor.getString(COLUMN_INDEX_DESCRIPTION)
+                val rating = cursor.getDouble(COLUMN_INDEX_RATING)
 
                 result.add(Film(title, poster, description, rating))
             } while (cursor.moveToNext())
         }
         //Возвращем список фильмов
         return result
+    }
+
+    companion object {
+        const val COLUMN_INDEX_TITLE = 1
+        const val COLUMN_INDEX_POSTER = 2
+        const val COLUMN_INDEX_DESCRIPTION = 3
+        const val COLUMN_INDEX_RATING = 4
     }
 }

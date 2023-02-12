@@ -19,7 +19,6 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                     "$COLUMN_DESCRIPTION TEXT," +
                     "$COLUMN_RATING REAL);"
         )
-
     }
 
     //Миграций мы не предполагаем, поэтому метод пустой
