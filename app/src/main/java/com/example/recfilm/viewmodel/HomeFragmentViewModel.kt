@@ -30,8 +30,11 @@ class HomeFragmentViewModel : ViewModel() {
                 _filmsListLiveData.postValue(films)
             }
 
+            //Кладём фильмы из БД в LiveData, чтобы на UI появился список фильмов
             override fun onFailure() {
+                _filmsListLiveData.postValue(interactor.getFilmsFromDB())
             }
+
         })
     }
 

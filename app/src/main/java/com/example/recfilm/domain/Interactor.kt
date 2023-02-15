@@ -24,8 +24,13 @@ class Interactor(
                     call: Call<TmdbResultsDto>,
                     response: Response<TmdbResultsDto>,
                 ) {
-                    //При успехе мы вызываем метод передаем onSuccess и в этот коллбэк список фильмов
-                    callback.onSuccess(Converter.convertApiListDtoList(response.body()?.tmdbFilms))
+                    //При успехе вызываем метод, передаём on Success и в этот коллбэк список фильмов
+                    val list = Converter.convertApiListDtoList(response.body()?.tmdbFilms)
+                    //Кладём фильмы в бд
+                    list.forEach {
+                        repo.putToDb(film = it)
+                    }
+                    callback.onSuccess(list)
                 }
 
                 override fun onFailure(call: Call<TmdbResultsDto>, t: Throwable) {
@@ -42,5 +47,8 @@ class Interactor(
 
     //Метод для получения настроек
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
+
+    //Вызываем метод репозитория другим методом, чтобы он забрал фильмы из БД
+    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
 }
 
