@@ -12,7 +12,7 @@ interface FilmDao {
     @Query("SELECT * FROM cached_film")
     fun getCachedFilms(): List<Film>  // забирает все вильмы из БД
 
-    //Кладём списов в БД, в случае конфликта перезаписываем
+    //Кладём список в БД, в случае конфликта перезаписываем
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(list: List<Film>) // кладёт фильмы списком в БД
 }
