@@ -14,5 +14,5 @@ interface FilmDao {
 
     //Кладём списов в БД, в случае конфликта перезаписываем
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(list: List<Film>)
+    fun insertAll(list: List<Film>) // кладёт фильмы списком в БД
 }
