@@ -3,7 +3,7 @@ package com.example.recfilm.data
 import android.content.ContentValues
 import android.database.Cursor
 import com.example.recfilm.data.db.DatabaseHelper
-import com.example.recfilm.domain.Film
+import com.example.recfilm.data.Entity.Film
 
 class MainRepository(databaseHelper: DatabaseHelper) {
     //Инициализируем объект для взаимодействии с БД

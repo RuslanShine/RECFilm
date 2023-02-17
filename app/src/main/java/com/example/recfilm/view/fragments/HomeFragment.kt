@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.recfilm.R
 import com.example.recfilm.databinding.FragmentHomeBinding
-import com.example.recfilm.domain.Film
+import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.utils.AnimationHelper
 import com.example.recfilm.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.recfilm.view.MainActivity

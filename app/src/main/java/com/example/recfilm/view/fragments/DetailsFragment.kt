@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.recfilm.R
 import com.example.recfilm.data.ApiConstants
 import com.example.recfilm.databinding.FragmentDetailsBinding
-import com.example.recfilm.domain.Film
+import com.example.recfilm.data.Entity.Film
 
 
 class DetailsFragment : Fragment() {

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recfilm.databinding.FilmItemBinding
-import com.example.recfilm.domain.Film
+import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.view.rv_viewholders.FilmViewHolder
 import kotlinx.android.synthetic.main.film_item.view.*
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.recfilm.App
-import com.example.recfilm.domain.Film
+import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.domain.Interactor
 import javax.inject.Inject
 

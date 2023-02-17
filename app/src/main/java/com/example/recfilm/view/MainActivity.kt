@@ -2,12 +2,11 @@ package com.example.recfilm.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.recfilm.R
 import com.example.recfilm.databinding.ActivityMainBinding
-import com.example.recfilm.domain.Film
+import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.view.fragments.*
 
 
