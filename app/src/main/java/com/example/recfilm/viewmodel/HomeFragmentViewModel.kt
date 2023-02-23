@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.recfilm.App
-import com.example.recfilm.domain.Film
+import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.domain.Interactor
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 const val FILM_PAGE_ONE = 1
@@ -30,11 +31,12 @@ class HomeFragmentViewModel : ViewModel() {
                 _filmsListLiveData.postValue(films)
             }
 
-            //Кладём фильмы из БД в LiveData, чтобы на UI появился список фильмов
+            //Кладём фильмы из БД в LiveData, чтобы на UI появился список фильмов в отдельном потоке
             override fun onFailure() {
-                _filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                Executors.newSingleThreadExecutor().execute {
+                    _filmsListLiveData.postValue(interactor.getFilmsFromDB())
+                }
             }
-
         })
     }
 

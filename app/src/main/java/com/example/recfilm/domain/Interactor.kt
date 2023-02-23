@@ -1,6 +1,7 @@
 package com.example.recfilm.domain
 
 import com.example.recfilm.API
+import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.data.Entity.TmdbResultsDto
 import com.example.recfilm.data.MainRepository
 import com.example.recfilm.data.TmdbApi
@@ -28,7 +29,7 @@ class Interactor(
                     val list = Converter.convertApiListDtoList(response.body()?.tmdbFilms)
                     //Кладём фильмы в бд
                     list.forEach {
-                        repo.putToDb(film = it)
+                        repo.putToDb(list)
                     }
                     callback.onSuccess(list)
                 }
