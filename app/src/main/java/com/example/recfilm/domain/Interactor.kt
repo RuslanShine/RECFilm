@@ -1,5 +1,6 @@
 package com.example.recfilm.domain
 
+import androidx.lifecycle.LiveData
 import com.example.recfilm.API
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.data.Entity.TmdbResultsDto
@@ -31,7 +32,7 @@ class Interactor(
                     list.forEach {
                         repo.putToDb(list)
                     }
-                    callback.onSuccess(list)
+                    callback.onSuccess()
                 }
 
                 override fun onFailure(call: Call<TmdbResultsDto>, t: Throwable) {
@@ -50,6 +51,6 @@ class Interactor(
     fun getDefaultCategoryFromPreferences() = preferences.getDefaultCategory()
 
     //Вызываем метод репозитория другим методом, чтобы он забрал фильмы из БД
-    fun getFilmsFromDB(): List<Film> = repo.getAllFromDB()
+    fun getFilmsFromDB(): LiveData<List<Film>> = repo.getAllFromDB()
 }
 

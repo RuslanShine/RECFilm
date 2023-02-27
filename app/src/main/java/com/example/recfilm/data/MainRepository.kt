@@ -2,6 +2,7 @@ package com.example.recfilm.data
 
 import android.content.ContentValues
 import android.database.Cursor
+import androidx.lifecycle.LiveData
 import com.example.recfilm.data.db.DatabaseHelper
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.data.dao.FilmDao
@@ -16,7 +17,6 @@ class MainRepository(private val filmDao: FilmDao) {
         }
     }
 
-    fun getAllFromDB(): List<Film> {
-        return filmDao.getCachedFilms()  // забирает все вильмы из БД
-    }
+    fun getAllFromDB(): LiveData<List<Film>> =
+        filmDao.getCachedFilms()  // забирает все вильмы из БД
 }
