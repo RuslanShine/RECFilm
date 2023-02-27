@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.fragment_placeholder, fragment, tag)
-            .addToBackStack(null)
+//            .addToBackStack(null)                                      //фрагменты нижнего бара
             .commit()
     }
 
