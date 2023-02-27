@@ -28,4 +28,8 @@
     <dimen name="layout_margin_details_fab_favorites">16dp</dimen>
     <dimen name="layout_margin_details_description">8dp</dimen>
 
+    //progress_bar
+    <dimen name="layout_width_progress_bar">100dp</dimen>
+    <dimen name="layout_height_progress_bar">100dp</dimen>
+
 </resources>

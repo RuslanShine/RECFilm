@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recfilm.databinding.FragmentHomeBinding
@@ -65,6 +66,10 @@ class HomeFragment : Fragment() {
         viewModel.filmsListLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             filmsDataBase = it
             filmsAdapter.addItems(it)
+        })
+        //подписываемся на изменения в прогресс-баре
+        viewModel.showProgressBar.observe(viewLifecycleOwner, androidx.lifecycle.Observer<Boolean>{
+            binding.progressBar.isVisible = it
         })
     }
 
@@ -126,7 +131,7 @@ class HomeFragment : Fragment() {
             val decorator = TopSpacingItemDecoration(TOP_SPACING_ITEM)
             addItemDecoration(decorator)
         }
-//        filmsAdapter.addItems(filmsDataBase)
+
     }
 }
 
