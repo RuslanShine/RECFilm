@@ -68,9 +68,9 @@ class HomeFragment : Fragment() {
             filmsAdapter.addItems(it)
         })
         //подписываемся на изменения в прогресс-баре
-        viewModel.showProgressBar.observe(viewLifecycleOwner, androidx.lifecycle.Observer<Boolean>{
+        viewModel.showProgressBar.observe(viewLifecycleOwner){
             binding.progressBar.isVisible = it
-        })
+        }
     }
 
     private fun initPullToRefresh() {
