@@ -12,36 +12,36 @@ import javax.inject.Inject
 const val FILM_PAGE_ONE = 1
 
 class HomeFragmentViewModel : ViewModel() {
-    private val _filmsListLiveData: MutableLiveData<List<Film>> = MutableLiveData()
-    val filmsListLiveData: LiveData<List<Film>>
-        get() = _filmsListLiveData
+    //Поле для хранения LiveData показа прогресс-бара
+    val showProgressBar: MutableLiveData<Boolean> = MutableLiveData()
 
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
+    val filmsListLiveData: LiveData<List<Film>>
 
     init {
         App.instance.dagger.inject(this)
+        filmsListLiveData = interactor.getFilmsFromDB()
         getFilms()
     }
 
+    //показ прогресс-бара
     fun getFilms() {
+        showProgressBar.postValue(true)
         interactor.getFilmsFromApi(FILM_PAGE_ONE, object : ApiCallback {
-            override fun onSuccess(films: List<Film>) {
-                _filmsListLiveData.postValue(films)
+            override fun onSuccess() {
+                showProgressBar.postValue(false)
             }
 
-            //Кладём фильмы из БД в LiveData, чтобы на UI появился список фильмов в отдельном потоке
             override fun onFailure() {
-                Executors.newSingleThreadExecutor().execute {
-                    _filmsListLiveData.postValue(interactor.getFilmsFromDB())
-                }
+                showProgressBar.postValue(false)
             }
         })
     }
 
     interface ApiCallback {
-        fun onSuccess(films: List<Film>)
+        fun onSuccess()
         fun onFailure()
     }
 }

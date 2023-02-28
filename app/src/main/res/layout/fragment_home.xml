@@ -40,5 +40,15 @@
             tools:listitem="@layout/film_item" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/layout_width_progress_bar"
+        android:layout_height="@dimen/layout_height_progress_bar"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
