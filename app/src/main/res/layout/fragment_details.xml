@@ -69,6 +69,31 @@
         app:srcCompat="@drawable/ic_baseline_favorite_border_24"
         android:tint="@android:color/white"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/details_fab_download_wp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="16dp"
+        app:borderWidth="0dp"
+        android:translationX="72dp"
+        android:backgroudTint="@color/purple_500"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGraviti="left|bottom"
+        app:srcCompat="@drawable/ic_baseline_cloud_download_24"
+        app:tint="@color/white"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:translationZ="10dp"
+        app:layout_anchor="@id/details_fab_download_wp"
+        app:layout_anchorGravity="center"/>
+
+
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -82,6 +107,5 @@
             tools:text="@tools:sample/lorem/random" />
 
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
