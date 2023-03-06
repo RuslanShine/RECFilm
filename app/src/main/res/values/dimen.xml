@@ -28,6 +28,13 @@
     <dimen name="layout_margin_details_fab_favorites">16dp</dimen>
     <dimen name="layout_margin_details_description">8dp</dimen>
 
+    <dimen name="layout_margin_details_fab_download_wp">16dp</dimen>
+    <dimen name="translationX_details_fab_download_wp">72dp</dimen>
+    //fragment_details_progress_bar
+    <dimen name="layout_width_progress_bar_fab_download_wp">50dp</dimen>
+    <dimen name="layout_height_progress_bar_fab_download_wp">50dp</dimen>
+    <dimen name="translationZ_progress_bar_details_fab_download_wp">10dp</dimen>
+
     //progress_bar
     <dimen name="layout_width_progress_bar">100dp</dimen>
     <dimen name="layout_height_progress_bar">100dp</dimen>
