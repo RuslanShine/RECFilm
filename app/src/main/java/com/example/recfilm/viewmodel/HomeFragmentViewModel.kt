@@ -6,42 +6,32 @@ import androidx.lifecycle.ViewModel
 import com.example.recfilm.App
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.domain.Interactor
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.Executors
+
 import javax.inject.Inject
 
 const val FILM_PAGE_ONE = 1
 
 class HomeFragmentViewModel : ViewModel() {
-    //Поле для хранения LiveData показа прогресс-бара
-    val showProgressBar: MutableLiveData<Boolean> = MutableLiveData()
 
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
-    val filmsListLiveData: LiveData<List<Film>>
+    val filmsListData: Flow<List<Film>>
+    //Поле для хранения показа прогресс-бара
+    val showProgressBar: Channel<Boolean>
 
     init {
         App.instance.dagger.inject(this)
-        filmsListLiveData = interactor.getFilmsFromDB()
+        showProgressBar = interactor.progressBarState
+        filmsListData = interactor.getFilmsFromDB()
         getFilms()
     }
 
     //показ прогресс-бара
     fun getFilms() {
-        showProgressBar.postValue(true)
-        interactor.getFilmsFromApi(FILM_PAGE_ONE, object : ApiCallback {
-            override fun onSuccess() {
-                showProgressBar.postValue(false)
-            }
-
-            override fun onFailure() {
-                showProgressBar.postValue(false)
-            }
-        })
-    }
-
-    interface ApiCallback {
-        fun onSuccess()
-        fun onFailure()
+        interactor.getFilmsFromApi(FILM_PAGE_ONE)
     }
 }
