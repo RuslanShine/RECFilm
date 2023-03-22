@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recfilm.databinding.FragmentHomeBinding
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.utils.AnimationHelper
+import com.example.recfilm.utils.AutoDisposable
+import com.example.recfilm.utils.addTo
 import com.example.recfilm.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.recfilm.view.MainActivity
 import com.example.recfilm.view.rv_adapters.TopSpacingItemDecoration
@@ -33,6 +35,7 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private val autoDisposable = AutoDisposable()
 
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private var _binding: FragmentHomeBinding? = null
@@ -49,6 +52,14 @@ class HomeFragment : Fragment() {
             //Обновляем RV адаптер
             filmsAdapter.addItems(field)
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Привязываемся к ЖЦ компонента
+        autoDisposable.bindTo(lifecycle)
+        //Фрагмент переживает пересоздание хост-активити
+        retainInstance = true
+    }
 
     override fun onDestroy() {
         _binding = null
@@ -84,6 +95,7 @@ class HomeFragment : Fragment() {
                 filmsAdapter.addItems(list)
                 filmsDataBase = list
             }
+            .addTo(autoDisposable)
 
         viewModel.showProgressBar
             .subscribeOn(Schedulers.io())
@@ -91,6 +103,7 @@ class HomeFragment : Fragment() {
             .subscribe {
                 binding.progressBar.isVisible = it
             }
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {
