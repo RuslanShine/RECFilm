@@ -11,10 +11,6 @@ android {
     namespace 'com.example.recfilm'
     compileSdk 33
 
-    buildFeatures {
-        viewBinding true
-    }
-
     defaultConfig {
         applicationId "com.example.recfilm"
         minSdk 21
@@ -39,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
 
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 }
 
@@ -74,14 +74,24 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.44.2'
 
     //Room
-    def room_version = "2.5.0"
+//    def room_version = "2.5.0"
+//    implementation "androidx.room:room-runtime:$room_version"
+//    kapt "androidx.room:room-compiler:$room_version"
+//    implementation "androidx.room:room-ktx:$room_version"
+//    kapt "androidx.room:room-compiler:$room_version"
+
+    def room_version = "2.3.0-beta02"
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava3:2.3.0-beta02"
     kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-ktx:$room_version"
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+
+    //RxJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.10'
 
 
 }

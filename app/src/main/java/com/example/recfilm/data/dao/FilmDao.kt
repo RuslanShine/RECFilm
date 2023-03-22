@@ -6,13 +6,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.recfilm.data.Entity.Film
+import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FilmDao {
     //Сделаем запрос на всю таблицу
     @Query("SELECT * FROM cached_film")
-    fun getCachedFilms(): Flow<List<Film>>  // забирает все вильмы из БД
+    fun getCachedFilms(): Observable<List<Film>>  // забирает все вильмы из БД
 
     //Кладём список в БД, в случае конфликта перезаписываем
     @Insert(onConflict = OnConflictStrategy.REPLACE)
