@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.example.recfilm.App
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.domain.Interactor
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.Executors
@@ -19,9 +21,9 @@ class HomeFragmentViewModel : ViewModel() {
     //Инициализируем интерактор
     @Inject
     lateinit var interactor: Interactor
-    val filmsListData: Flow<List<Film>>
+    val filmsListData: Observable<List<Film>>
     //Поле для хранения показа прогресс-бара
-    val showProgressBar: Channel<Boolean>
+    val showProgressBar: BehaviorSubject<Boolean>
 
     init {
         App.instance.dagger.inject(this)

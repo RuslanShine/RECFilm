@@ -13,10 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recfilm.databinding.FragmentHomeBinding
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.utils.AnimationHelper
+import com.example.recfilm.utils.AutoDisposable
+import com.example.recfilm.utils.addTo
 import com.example.recfilm.view.rv_adapters.FilmListRecyclerAdapter
 import com.example.recfilm.view.MainActivity
 import com.example.recfilm.view.rv_adapters.TopSpacingItemDecoration
 import com.example.recfilm.viewmodel.HomeFragmentViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.coroutines.CoroutineContext
@@ -30,8 +35,8 @@ class HomeFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(HomeFragmentViewModel::class.java)
     }
+    private val autoDisposable = AutoDisposable()
 
-    private lateinit var scope: CoroutineScope
     private lateinit var filmsAdapter: FilmListRecyclerAdapter
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding
@@ -47,6 +52,14 @@ class HomeFragment : Fragment() {
             //Обновляем RV адаптер
             filmsAdapter.addItems(field)
         }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Привязываемся к ЖЦ компонента
+        autoDisposable.bindTo(lifecycle)
+        //Фрагмент переживает пересоздание хост-активити
+        retainInstance = true
+    }
 
     override fun onDestroy() {
         _binding = null
@@ -75,31 +88,22 @@ class HomeFragment : Fragment() {
         //находим наш RV
         initRecyckler()
         //Кладем нашу БД в RV
-        scope = CoroutineScope(Dispatchers.IO).also { scope ->
-            scope.launch {
-                viewModel.filmsListData.collect {
-                    withContext(Dispatchers.Main) {
-                        filmsAdapter.addItems(it)
-                        filmsDataBase = it
-                    }
-                }
+        viewModel.filmsListData
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                filmsAdapter.addItems(list)
+                filmsDataBase = list
             }
+            .addTo(autoDisposable)
 
-            //подписываемся на изменения в прогресс-баре
-            scope.launch {
-                for (element in viewModel.showProgressBar) {
-                    launch(Dispatchers.Main) {
-                        binding.progressBar.isVisible = element
-                    }
-                }
+        viewModel.showProgressBar
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.progressBar.isVisible = it
             }
-        }
-    }
-
-    //закрываем Корутины
-    override fun onStop() {
-        super.onStop()
-        scope.cancel()
+            .addTo(autoDisposable)
     }
 
     private fun initPullToRefresh() {
