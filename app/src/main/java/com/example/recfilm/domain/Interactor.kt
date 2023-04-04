@@ -22,6 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+const val PAGE_ONE = 1
 
 class Interactor(
     private val repo: MainRepository,
@@ -58,6 +59,13 @@ class Interactor(
                 }
             })
     }
+
+    //метод запроса для поиска, возвращает observable
+    fun getSearchResultFromApi(search: String): Observable<List<Film>> =
+        retrofitService.getFilmFromSearch(API.KEY, "ru-RU", search, PAGE_ONE)
+            .map {
+                Converter.convertApiListDtoList(it.tmdbFilms) //map, чтобы конвертировать ответ от сервера в DTO-объект
+            }
 
     //Метод для сохранения настроек
     fun saveDefaultCategoryToPreferences(category: String) {

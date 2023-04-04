@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -20,16 +21,20 @@ import com.example.recfilm.view.MainActivity
 import com.example.recfilm.view.rv_adapters.TopSpacingItemDecoration
 import com.example.recfilm.viewmodel.HomeFragmentViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 class HomeFragment : Fragment() {
     private val POSITION_ANIMATION_HELPER = 1
     private val TOP_SPACING_ITEM = 8
+    private val TIMEOUT_SEARCH = 800L
 
 
     private val viewModel by lazy {
@@ -124,31 +129,57 @@ class HomeFragment : Fragment() {
             binding.searchView.isIconified = false
         }
 
-        //Слушатель изменений введенного текста
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            // Обработка нажатия "поиск" на клавиатуре
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return true
-            }
+        io.reactivex.rxjava3.core.Observable.create(ObservableOnSubscribe<String> { subscriber ->
+            //Вешаем слушатель на клавиатуру
+            binding.searchView.setOnQueryTextListener(object :
+            //Вызывается на ввод символов
+                SearchView.OnQueryTextListener {
+                override fun onQueryTextChange(newText: String): Boolean {
+                    filmsAdapter.items.clear() //очищаем RV-адаптер, готовя место под ответ с сервера
+                    subscriber.onNext(newText) //отправляем по потоку поисковой запрос
+                    return false
+                }
 
-            //Обработка кайдого изменения текста
-            override fun onQueryTextChange(newText: String): Boolean {
-                //Если ввод пуст вставляем всю БД в адаптер
-                if (newText.isEmpty()) {
-                    filmsAdapter.addItems(filmsDataBase)
-                    return true
+                //Вызывается по нажатию кнопки "Поиск", отправляем поисковой запрос
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    subscriber.onNext(query)
+                    return false
                 }
-                //Фильтруем список на подходящие сочетания
-                val result = filmsDataBase.filter {
-                    //Приводим запрос и ммя фильма к нижнему регистру
-                    it.title.toLowerCase(Locale.getDefault())
-                        .contains(newText.toLowerCase(Locale.getDefault()))
-                }
-                //Добавляем в адаптер
-                filmsAdapter.addItems(result)
-                return true
-            }
+            })
         })
+            //Указываем, в каком планировщике будет выполняться работа
+            .subscribeOn(Schedulers.io())
+            //Приводим ввод текста для поиска к нижнему регистр
+            .map {
+                it.toLowerCase(Locale.getDefault()).trim()
+            }
+            //чтобы наши поисковые запросы срабатывали не на каждое введение символа,
+            //чтобы зазря не совершать запросы на сервер
+            .debounce(800, TimeUnit.MILLISECONDS)
+            //фильтруем результат, если у нас введена пустая строка
+            .filter {
+                //Если в поиске пустое поле, возвращаем список фильмов по умолчанию
+                viewModel.getFilms()
+                it.isNotBlank()
+            }
+            //Переходим в другой Observable
+            .flatMap {
+                viewModel.getSearchResult(it)
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            //метод позволяет в параметры метода передать лямбды, которые нужны
+            .subscribeBy(
+                onError = {
+                    Toast.makeText(requireContext(), "Что-то пошло не так", Toast.LENGTH_SHORT)
+                        .show()
+                },
+                onNext = {
+                    filmsAdapter.addItems(it)
+                }
+            )
+            //Отписываемся по окончанию
+            .addTo(autoDisposable)
     }
 
     private fun initRecyckler() {

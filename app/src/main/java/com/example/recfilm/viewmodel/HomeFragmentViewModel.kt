@@ -22,6 +22,7 @@ class HomeFragmentViewModel : ViewModel() {
     @Inject
     lateinit var interactor: Interactor
     val filmsListData: Observable<List<Film>>
+
     //Поле для хранения показа прогресс-бара
     val showProgressBar: BehaviorSubject<Boolean>
 
@@ -36,4 +37,7 @@ class HomeFragmentViewModel : ViewModel() {
     fun getFilms() {
         interactor.getFilmsFromApi(FILM_PAGE_ONE)
     }
+
+    //поиск
+    fun getSearchResult(search: String) = interactor.getSearchResultFromApi(search)
 }
