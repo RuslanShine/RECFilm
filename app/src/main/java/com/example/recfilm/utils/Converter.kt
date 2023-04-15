@@ -1,7 +1,8 @@
 package com.example.recfilm.utils
 
-import com.example.recfilm.data.Entity.TmdbFilm
+
 import com.example.recfilm.data.Entity.Film
+import com.example.remote_module.entity.TmdbFilm
 
 object Converter {
     fun convertApiListDtoList(list: List<TmdbFilm>?): List<Film> {

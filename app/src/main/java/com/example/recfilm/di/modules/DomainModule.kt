@@ -2,7 +2,7 @@ package com.example.recfilm.di.modules
 
 import android.content.Context
 import com.example.recfilm.data.MainRepository
-import com.example.recfilm.data.TmdbApi
+import com.example.remote_module.TmdbApi
 import com.example.recfilm.data.preferenes.PreferenceProvider
 import com.example.recfilm.domain.Interactor
 import dagger.Module
@@ -22,7 +22,7 @@ class DomainModule(val context: Context) {
     @Provides
     fun provideInteractor(
         repository: MainRepository,
-        tmdbApi: TmdbApi,
+        tmdbApi: com.example.remote_module.TmdbApi,
         preferenceProvider: PreferenceProvider,
     ) = Interactor(repo = repository, retrofitService = tmdbApi, preferences = preferenceProvider)
 }
