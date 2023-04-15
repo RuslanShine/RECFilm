@@ -3,10 +3,8 @@ package com.example.recfilm.domain
 import com.example.recfilm.API
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.data.MainRepository
-import com.example.remote_module.TmdbApi
 import com.example.recfilm.data.preferenes.PreferenceProvider
 import com.example.recfilm.utils.Converter
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
