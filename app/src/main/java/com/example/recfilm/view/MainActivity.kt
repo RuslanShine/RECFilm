@@ -1,5 +1,8 @@
 package com.example.recfilm.view
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -7,12 +10,14 @@ import androidx.fragment.app.Fragment
 import com.example.recfilm.R
 import com.example.recfilm.databinding.ActivityMainBinding
 import com.example.recfilm.data.Entity.Film
+import com.example.recfilm.receivers.ConnectionChecker
 import com.example.recfilm.view.fragments.*
 
 
 class MainActivity : AppCompatActivity() {
     private val NUMBER_FRAGMENTS = 1
     private lateinit var binding: ActivityMainBinding
+    private lateinit var receiver: BroadcastReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +31,22 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_placeholder, HomeFragment())
             .addToBackStack(null)
             .commit()
+
+        //BroadcastReceive слушает низкий уроввень батареи и подключение кабеля зарядки
+        //инициальзировали переменную
+        receiver = ConnectionChecker()
+        //добавляем фильтры
+        val filters = IntentFilter().apply {
+            addAction(Intent.ACTION_POWER_CONNECTED)
+            addAction(Intent.ACTION_BATTERY_LOW)
+        }
+        //Регистрируем receiver
+        registerReceiver(receiver,filters)
+    }
+    //Отключаем receiver
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
     }
 
     fun launchDetailsFragment(film: Film) {
