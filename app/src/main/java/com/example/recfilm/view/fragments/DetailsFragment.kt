@@ -17,7 +17,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.recfilm.R
-import com.example.recfilm.data.ApiConstants
+import com.example.remote_module.entity.ApiConstants
 import com.example.recfilm.databinding.FragmentDetailsBinding
 import com.example.recfilm.data.Entity.Film
 import com.example.recfilm.viewmodel.DetailsFragmentViewModel
@@ -102,7 +102,7 @@ class DetailsFragment : Fragment() {
         binding.detailsToolbar.title = film.title
         //Устанавливаем картинку
         Glide.with(this)
-            .load(ApiConstants.IMAGES_URL + "w780" + film.poster)
+            .load(com.example.remote_module.entity.ApiConstants.IMAGES_URL + "w780" + film.poster)
             .centerCrop()
             .into(binding.detailsPoster)
         //Устанавливаем описание
@@ -127,7 +127,7 @@ class DetailsFragment : Fragment() {
             binding.progressBar.isVisible = true
             //Создаём через async, так как нам нужен результат от работы, то есть Bitmap
             val job = scope.async {
-                viewModel.loadWallpaper(ApiConstants.IMAGES_URL + "original" + film.poster)
+                viewModel.loadWallpaper(com.example.remote_module.entity.ApiConstants.IMAGES_URL + "original" + film.poster)
             }
             //Сохраняем в галерею, как только файл загрузился
             saveToGallery(job.await())

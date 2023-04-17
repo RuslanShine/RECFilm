@@ -1,8 +1,8 @@
-package com.example.recfilm.di.modules
+package com.example.remote_module
 
-import com.example.recfilm.BuildConfig
-import com.example.recfilm.data.ApiConstants
-import com.example.recfilm.data.TmdbApi
+
+import androidx.viewbinding.BuildConfig
+import com.example.remote_module.entity.ApiConstants
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -12,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 @Module
 class RemoteModule {
@@ -45,5 +46,5 @@ class RemoteModule {
 
     @Provides
     @Singleton
-    fun provideTmdbApi(retrofit: Retrofit): TmdbApi = retrofit.create(TmdbApi::class.java)
+    fun provideTmdbApi(retrofit: Retrofit): com.example.remote_module.TmdbApi = retrofit.create(com.example.remote_module.TmdbApi::class.java)
 }
