@@ -39,4 +39,8 @@
     <dimen name="layout_width_progress_bar">100dp</dimen>
     <dimen name="layout_height_progress_bar">100dp</dimen>
 
+    //FloatingActionButton
+    <dimen name="layout_margin_fab_watch_later">16dp</dimen>
+    <dimen name="translationX_watch_later">144dp</dimen>
+
 </resources>
