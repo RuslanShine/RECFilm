@@ -24,6 +24,7 @@ import com.example.recfilm.viewmodel.DetailsFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 //import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.example.recfilm.view.notofications.NotificationHelper
 import kotlinx.coroutines.*
 
 
@@ -86,6 +87,11 @@ class DetailsFragment : Fragment() {
 
         binding.detailsFabDownloadWp.setOnClickListener {
             performAsyncLoadOfPoster()
+        }
+
+        //Инициируем нотификацию по нажатию на кноку
+        binding.detailsFabWatchLater.setOnClickListener{
+            NotificationHelper.createNotification(requireContext(),film)
         }
     }
 
