@@ -91,7 +91,7 @@ class DetailsFragment : Fragment() {
 
         //Инициируем нотификацию по нажатию на кноку
         binding.detailsFabWatchLater.setOnClickListener{
-            NotificationHelper.createNotification(requireContext(),film)
+            NotificationHelper.notificationSet(requireContext(),film)
         }
     }
 

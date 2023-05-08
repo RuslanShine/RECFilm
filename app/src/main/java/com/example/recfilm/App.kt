@@ -27,8 +27,8 @@ class App : Application() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             //Задаем имя, описание и важность канала
-            val name = "WatchLaterChannel"
-            val descriptionText = "RecFilms notification Channel"
+            val name = NAME_NOTIFICATION_CHANNEL
+            val descriptionText = DESCRIPTION_TEXT_NOTIFICATION
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             //Создаем канал, передав в параметры его ID(строка), имя(строка), важность(константа)
             val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
@@ -44,5 +44,7 @@ class App : Application() {
     companion object {
         lateinit var instance: App
             private set
+        const val NAME_NOTIFICATION_CHANNEL = "WatchLaterChannel"
+        const val DESCRIPTION_TEXT_NOTIFICATION = "RecFilms notification Channel"
     }
 }
