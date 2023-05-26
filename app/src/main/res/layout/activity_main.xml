@@ -8,6 +8,14 @@
     android:background="@drawable/background"
     tools:context=".view.MainActivity">
 
+    <com.example.recfilm.view.customviews.PromoView
+        android:id="@+id/promo_view_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:translationZ="10dp"
+        android:visibility="gone" />
+
     <FrameLayout
         android:id="@+id/fragment_placeholder"
         android:layout_width="match_parent"

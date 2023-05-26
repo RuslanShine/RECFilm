@@ -13,6 +13,7 @@ import com.example.remote_module.DaggerRemoteComponent
 
 class App : Application() {
     lateinit var dagger: AppComponent
+    var isPromoShown = false
 
     override fun onCreate() {
         super.onCreate()
