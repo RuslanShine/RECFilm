@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         //Регистрируем receiver
         registerReceiver(receiver,filters)
 
+        //Remote Config
         if (!App.instance.isPromoShown) {
             //Получаем доступ к Remote Config
             val firebaseRemoteConfig = FirebaseRemoteConfig.getInstance()
